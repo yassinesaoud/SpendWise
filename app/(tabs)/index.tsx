@@ -7,6 +7,7 @@ import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, Platform, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
+import QuickStatsCard from '../../src/components/QuickStatsCard';
 import SpendingPredictionCard from '../../src/components/SpendingPredictionCard';
 import { useTheme } from '../../src/context/ThemeContext';
 import { useCurrency } from '../../src/hooks/useCurrency';
@@ -77,6 +78,10 @@ export default function DashboardScreen() {
       legendFontSize: 12,
     };
   });
+
+  // Get top category
+  const topCategory = Object.entries(categoryTotals).sort((a, b) => (b[1] as number) - (a[1] as number))[0];
+  const topCategoryName = topCategory ? ((CATEGORIES as Record<string, typeof CATEGORIES.other>)[topCategory[0]] || CATEGORIES.other).name : 'N/A';
 
   const getBudgetStatus = () => {
     if (budgetPercentage >= 100) return { color: '#E74C3C', label: 'Dépassé', icon: 'alert-circle' };
@@ -159,6 +164,14 @@ export default function DashboardScreen() {
             {budgetPercentage.toFixed(1)}% utilisé ({totalSpent.toFixed(2)} / {monthlyBudget} TND)
           </Text>
         </View>
+
+        {/* Quick Stats */}
+        <QuickStatsCard
+          totalSpent={totalSpent}
+          monthlyBudget={monthlyBudget}
+          expensesCount={expenses.length}
+          topCategory={topCategoryName}
+        />
 
         {/* Spending Prediction */}
         <SpendingPredictionCard expenses={expenses} monthlyBudget={monthlyBudget} />

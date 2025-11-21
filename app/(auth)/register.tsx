@@ -19,12 +19,34 @@ interface FormErrors {
   phone?: string;
 }
 
-const TUNISIAN_GOVERNORATES = [
-  'Ariana', 'Béja', 'Ben Arous', 'Bizerte', 'Gabès', 'Gafsa', 'Jendouba',
-  'Kairouan', 'Kasserine', 'Kébili', 'Kef', 'Mahdia', 'Manouba', 'Médenine',
-  'Monastir', 'Nabeul', 'Sfax', 'Sidi Bouzid', 'Siliana', 'Sousse', 'Tataouine',
-  'Tozeur', 'Tunis', 'Zaghouan'
-];
+const COUNTRIES = [
+  'Afghanistan', 'Albanie', 'Algérie', 'Allemagne', 'Andorre', 'Angola', 'Antigua-et-Barbuda',
+  'Arabie saoudite', 'Argentine', 'Arménie', 'Australie', 'Autriche', 'Azerbaïdjan', 'Bahamas',
+  'Bahreïn', 'Bangladesh', 'Barbade', 'Belgique', 'Belize', 'Bénin', 'Bhoutan', 'Biélorussie',
+  'Birmanie', 'Bolivie', 'Bosnie-Herzégovine', 'Botswana', 'Brésil', 'Brunei', 'Bulgarie',
+  'Burkina Faso', 'Burundi', 'Cambodge', 'Cameroun', 'Canada', 'Cap-Vert', 'Chili', 'Chine',
+  'Chypre', 'Colombie', 'Comores', 'Congo', 'Corée du Nord', 'Corée du Sud', 'Costa Rica',
+  'Côte d\'Ivoire', 'Croatie', 'Cuba', 'Danemark', 'Djibouti', 'Dominique', 'Égypte',
+  'Émirats arabes unis', 'Équateur', 'Érythrée', 'Espagne', 'Estonie', 'États-Unis', 'Éthiopie',
+  'Fidji', 'Finlande', 'France', 'Gabon', 'Gambie', 'Géorgie', 'Ghana', 'Grèce', 'Grenade',
+  'Guatemala', 'Guinée', 'Guinée-Bissau', 'Guinée équatoriale', 'Guyana', 'Haïti', 'Honduras',
+  'Hongrie', 'Inde', 'Indonésie', 'Irak', 'Iran', 'Irlande', 'Islande', 'Israël', 'Italie',
+  'Jamaïque', 'Japon', 'Jordanie', 'Kazakhstan', 'Kenya', 'Kirghizistan', 'Kiribati', 'Koweït',
+  'Laos', 'Lesotho', 'Lettonie', 'Liban', 'Liberia', 'Libye', 'Liechtenstein', 'Lituanie',
+  'Luxembourg', 'Macédoine du Nord', 'Madagascar', 'Malaisie', 'Malawi', 'Maldives', 'Mali',
+  'Malte', 'Maroc', 'Marshall', 'Maurice', 'Mauritanie', 'Mexique', 'Micronésie', 'Moldavie',
+  'Monaco', 'Mongolie', 'Monténégro', 'Mozambique', 'Namibie', 'Nauru', 'Népal', 'Nicaragua',
+  'Niger', 'Nigeria', 'Norvège', 'Nouvelle-Zélande', 'Oman', 'Ouganda', 'Ouzbékistan',
+  'Pakistan', 'Palaos', 'Palestine', 'Panama', 'Papouasie-Nouvelle-Guinée', 'Paraguay', 'Pays-Bas',
+  'Pérou', 'Philippines', 'Pologne', 'Portugal', 'Qatar', 'Roumanie', 'Royaume-Uni', 'Russie',
+  'Rwanda', 'Saint-Kitts-et-Nevis', 'Saint-Marin', 'Saint-Vincent-et-les-Grenadines', 'Salomon',
+  'Salvador', 'Samoa', 'Sao Tomé-et-Principe', 'Sénégal', 'Serbie', 'Seychelles', 'Sierra Leone',
+  'Singapour', 'Slovaquie', 'Slovénie', 'Somalie', 'Soudan', 'Soudan du Sud', 'Sri Lanka',
+  'Suède', 'Suisse', 'Suriname', 'Syrie', 'Tadjikistan', 'Tanzanie', 'Tchad', 'Tchéquie',
+  'Thaïlande', 'Timor oriental', 'Togo', 'Tonga', 'Trinité-et-Tobago', 'Tunisie', 'Turkménistan',
+  'Turquie', 'Tuvalu', 'Ukraine', 'Uruguay', 'Vanuatu', 'Vatican', 'Venezuela', 'Viêt Nam',
+  'Yémen', 'Zambie', 'Zimbabwe'
+].sort();
 
 export default function RegisterScreen() {
   const router = useRouter();
@@ -208,7 +230,7 @@ export default function RegisterScreen() {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.label}>Gouvernorat</Text>
+              <Text style={styles.label}>Pays</Text>
               <TouchableOpacity
                 style={styles.locationButton}
                 onPress={() => setShowLocationPicker(true)}
@@ -216,7 +238,7 @@ export default function RegisterScreen() {
                 {location ? (
                   <Text style={styles.locationText}>{location}</Text>
                 ) : (
-                  <Text style={styles.locationPlaceholder}>Sélectionner un gouvernorat</Text>
+                  <Text style={styles.locationPlaceholder}>Sélectionner un pays</Text>
                 )}
                 <Feather name="chevron-down" size={20} color={colors.textSecondary} />
               </TouchableOpacity>
@@ -322,7 +344,7 @@ export default function RegisterScreen() {
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Sélectionner un gouvernorat</Text>
+              <Text style={styles.modalTitle}>Sélectionner un pays</Text>
               <TouchableOpacity onPress={() => setShowLocationPicker(false)}>
                 <Feather name="x" size={24} color={colors.textPrimary} />
               </TouchableOpacity>
@@ -332,26 +354,26 @@ export default function RegisterScreen() {
               showsVerticalScrollIndicator={true}
               nestedScrollEnabled={true}
             >
-              {TUNISIAN_GOVERNORATES.map((gov) => (
+              {COUNTRIES.map((country) => (
                 <TouchableOpacity
-                  key={gov}
+                  key={country}
                   style={[
                     styles.locationOption,
-                    location === gov && styles.locationOptionSelected,
+                    location === country && styles.locationOptionSelected,
                   ]}
                   onPress={() => {
-                    setLocation(gov);
+                    setLocation(country);
                     setShowLocationPicker(false);
                   }}
                   activeOpacity={0.7}
                 >
                   <Text style={[
                     styles.locationOptionText,
-                    location === gov && styles.locationOptionTextSelected,
+                    location === country && styles.locationOptionTextSelected,
                   ]}>
-                    {gov}
+                    {country}
                   </Text>
-                  {location === gov && (
+                  {location === country && (
                     <Feather name="check" size={20} color={colors.primary} />
                   )}
                 </TouchableOpacity>

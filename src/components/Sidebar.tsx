@@ -5,7 +5,7 @@
 import { Feather } from '@expo/vector-icons';
 import { usePathname, useRouter } from 'expo-router';
 import React from 'react';
-import { Animated, Dimensions, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Dimensions, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const { width } = Dimensions.get('window');
 const SIDEBAR_WIDTH = 280;
@@ -48,13 +48,34 @@ const MENU_ITEMS: MenuItem[] = [
         route: '/heatmap',
         color: '#FF6B6B',
       },
-  {
-    id: 'budget',
-    title: 'Budget',
-    icon: 'credit-card',
-    route: '/budget',
-    color: '#6BCB77',
-  },
+      {
+        id: 'trends',
+        title: 'Tendances mensuelles',
+        icon: 'trending-up',
+        route: '/monthly-trends',
+        color: '#9B59B6',
+      },
+      {
+        id: 'budget',
+        title: 'Budget',
+        icon: 'credit-card',
+        route: '/budget',
+        color: '#6BCB77',
+      },
+      {
+        id: 'recurring',
+        title: 'Dépenses récurrentes',
+        icon: 'repeat',
+        route: '/recurring-expenses',
+        color: '#9B59B6',
+      },
+      {
+        id: 'savings',
+        title: 'Objectifs d\'épargne',
+        icon: 'target',
+        route: '/savings-goals',
+        color: '#FFD93D',
+      },
   {
     id: 'bills',
     title: 'Factures',
@@ -209,19 +230,23 @@ export default function Sidebar({ visible, onClose }: SidebarProps) {
           contentContainerStyle={styles.sidebarContent}
           showsVerticalScrollIndicator={false}
         >
-          {/* Header */}
-          <View style={styles.header}>
-            <View style={styles.logoContainer}>
-              <View style={styles.logo}>
-                <Text style={styles.logoText}>SW</Text>
-              </View>
-            </View>
-            <Text style={styles.appName}>SpendWise</Text>
-            <Text style={styles.appTagline}>Gérez vos finances</Text>
-            <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-              <Feather name="x" size={24} color="#1C1C1E" />
-            </TouchableOpacity>
-          </View>
+                {/* Header */}
+                <View style={styles.header}>
+                  <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+                    <Feather name="x" size={24} color="#1C1C1E" />
+                  </TouchableOpacity>
+                  <View style={styles.logoContainer}>
+                    <View style={styles.logoWrapper}>
+                      <Image
+                        source={require('../../assets/images/logo.png')}
+                        style={styles.logoImage}
+                        resizeMode="contain"
+                      />
+                    </View>
+                    <Text style={styles.appName}>SpendWise</Text>
+                    <Text style={styles.appTagline}>Gérez vos finances</Text>
+                  </View>
+                </View>
 
           {/* User Info */}
           <View style={styles.userCard}>
@@ -333,44 +358,57 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 24,
+    paddingTop: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E5EA',
     position: 'relative',
-  },
-  logoContainer: {
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  logo: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#233675',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
-  appName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#1C1C1E',
-    textAlign: 'center',
-    marginBottom: 4,
-  },
-  appTagline: {
-    fontSize: 12,
-    color: '#6E6E73',
-    textAlign: 'center',
   },
   closeButton: {
     position: 'absolute',
     top: 16,
     right: 16,
     padding: 8,
+    zIndex: 10,
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginTop: 8,
+    marginBottom: 12,
+  },
+  logoWrapper: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 12,
+    ...(Platform.OS === 'web' ? { boxShadow: '0 4px 12px rgba(35,54,117,0.15)' } : {
+      shadowColor: '#233675',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.15,
+      shadowRadius: 8,
+      elevation: 4,
+    }),
+  },
+  logoImage: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+  },
+  appName: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#1C1C1E',
+    textAlign: 'center',
+    marginBottom: 4,
+    letterSpacing: 0.5,
+  },
+  appTagline: {
+    fontSize: 12,
+    color: '#6E6E73',
+    textAlign: 'center',
+    fontWeight: '500',
   },
   userCard: {
     flexDirection: 'row',
