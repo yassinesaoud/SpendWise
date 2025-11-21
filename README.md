@@ -1,50 +1,107 @@
-# Welcome to your Expo app 👋
+# SpendWise 💰
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Application mobile de gestion de finances personnelles développée avec React Native et Expo.
 
-## Get started
+## 📱 Fonctionnalités
 
-1. Install dependencies
+### ✨ Fonctionnalités principales
+- **Suivi des dépenses** : Ajoutez et gérez vos dépenses quotidiennes
+- **Catégorisation automatique** : Catégorisation intelligente des dépenses
+- **Gestion du budget** : Suivez votre budget mensuel avec alertes
+- **Statistiques** : Visualisez vos dépenses avec graphiques et analyses
+- **Prédiction de dépenses** : Prédiction de fin de mois basée sur les 30 derniers jours
+- **Carte de chaleur** : Visualisation des dépenses par catégorie et jour
+- **Pièces jointes** : Ajoutez des reçus photos à vos dépenses
+- **Synchronisation bancaire** : Synchronisez vos transactions bancaires
+- **Gestion des factures** : Gérez vos factures avec upload de documents
+- **Notifications** : Alertes personnalisées pour budget et factures
 
-   ```bash
-   npm install
-   ```
+### 🎨 Personnalisation
+- **Mode sombre/clair** : Support complet du thème sombre
+- **Sélection de devise** : TND, EUR, USD avec conversion automatique
+- **Personnalisation des couleurs** : Choisissez votre couleur principale
+- **Taille de police** : Ajustez la taille du texte selon vos préférences
 
-2. Start the app
+### 🔐 Sécurité
+- Authentification sécurisée
+- Validation complète des formulaires
+- Gestion des permissions (caméra, galerie)
 
-   ```bash
-   npx expo start
-   ```
+## 🚀 Technologies
 
-In the output, you'll find options to open the app in a
+- **React Native** avec **Expo**
+- **Expo Router** pour la navigation
+- **TypeScript** pour la sécurité de type
+- **AsyncStorage** pour le stockage local
+- **React Native Chart Kit** pour les graphiques
+- **Expo Image Picker** pour les images
+- **Expo File System** pour la gestion des fichiers
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## 📦 Installation
 
 ```bash
-npm run reset-project
+# Cloner le dépôt
+git clone https://github.com/yassinesaoud/SpendWise.git
+
+# Installer les dépendances
+npm install
+
+# Démarrer l'application
+npm start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🏗️ Structure du projet
 
-## Learn more
+```
+SpendWise/
+├── app/                    # Routes Expo Router
+│   ├── (auth)/            # Écrans d'authentification
+│   ├── (tabs)/            # Écrans principaux
+│   └── ...
+├── src/
+│   ├── components/        # Composants réutilisables
+│   ├── context/           # Contextes React (Theme, etc.)
+│   ├── hooks/             # Hooks personnalisés
+│   ├── screens/           # Écrans (legacy)
+│   ├── services/          # Services API
+│   ├── theme/             # Configuration du thème
+│   └── utils/             # Utilitaires
+└── ...
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## 🎯 Fonctionnalités détaillées
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Gestion des devises
+- Support multi-devises (TND, EUR, USD)
+- Conversion automatique
+- Sauvegarde de préférence
 
-## Join the community
+### Prédiction de dépenses
+- Analyse des 30 derniers jours
+- Calcul de la moyenne quotidienne
+- Prédiction de fin de mois
+- Alertes de dépassement de budget
 
-Join our community of developers creating universal apps.
+### Carte de chaleur
+- Visualisation par catégorie (lignes)
+- Visualisation par jour (colonnes)
+- Intensité de couleur selon le montant
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Pièces jointes
+- Capture photo ou sélection depuis galerie
+- Sauvegarde sécurisée
+- Aperçu dans les détails
+- Suppression facile
+
+## 📝 License
+
+Ce projet est sous licence MIT.
+
+## 👤 Auteur
+
+**Yassine Saoud**
+- GitHub: [@yassinesaoud](https://github.com/yassinesaoud)
+
+## 🙏 Remerciements
+
+Merci d'utiliser SpendWise ! Pour toute question ou suggestion, n'hésitez pas à ouvrir une issue.
